@@ -1,0 +1,109 @@
+/* ═══════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #ebebeb;
+  direction: rtl;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: #106030;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/*
+  RTL layout:
+  - tb-icons (bell + ?) renders on the RIGHT (first child in RTL)
+  - tb-title is centred
+  - tb-menu (☰) renders on the LEFT (last child in RTL)
+  This matches the screenshot exactly.
+*/
+
+.tb-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.tb-title {
+  flex: 1;
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.tb-menu {
+  flex: 0 0 auto;
+}
+
+/* Generic icon tap zone */
+.ib {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  position: relative;
+}
+
+/* Red notification badge */
+.notif-badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  background: #e53935;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  line-height: 1;
+  border: 1.5px solid #106030;
+}
+
+/* ? — white bordered circle */
+.qbtn {
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

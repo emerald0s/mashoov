@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════
+   TAB BAR
+═══════════════════════════════════════ */
+
+.tabbar {
+  background: #1a5276;
+  display: flex;
+  align-items: stretch;
+  height: 46px;
+}
+
+/* Arrow boxes — indigo #3f51b5 as specified */
+.tab-arrow {
+  background: #3f51b5;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  width: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tabs-row {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Inactive day text: white at reduced opacity */
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Active tab: light blue-grey fill + #ffc107 amber text */
+.tab.active {
+  background: #d6eaf8;
+  color: #ffc107;
+  font-weight: 700;
+}

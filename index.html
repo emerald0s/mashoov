@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>משו"ב - מערכת שעות</title>
+  <link rel="stylesheet" href="src/css/topbar.css">
+  <link rel="stylesheet" href="src/css/tabbar.css">
+  <link rel="stylesheet" href="src/css/cards.css">
+  <link rel="stylesheet" href="src/css/editmode.css">
+  <link rel="stylesheet" href="src/css/bank.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="tb-icons">
+      <button class="ib" id="bellBtn">
+        🔔
+        <span class="notif-badge" id="notifBadge">4</span>
+      </button>
+      <button class="qbtn" id="editBtn">?</button>
+    </div>
+    <div class="tb-title">משו"ב - מערכת שעות</div>
+    <div class="tb-menu">
+      <button class="ib">☰</button>
+    </div>
+  </div>
+
+  <!-- EDIT BANNER -->
+  <div class="edit-banner" id="editBanner">
+    <span>מצב עריכה — גרור שיעורים לשינוי סדר</span>
+    <button class="edit-done" id="editDoneBtn">סיום</button>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tabbar">
+    <button class="tab-arrow" id="arrowLeft">&#8249;</button>
+    <div class="tabs-row" id="tabsRow"></div>
+    <button class="tab-arrow" id="arrowRight">&#8250;</button>
+  </div>
+
+  <!-- PERIOD LIST -->
+  <div class="period-list" id="periodList"></div>
+
+  <!-- SUBJECT BANK (bottom sheet) -->
+  <div class="bank-overlay" id="bankOverlay">
+    <div class="bank-sheet">
+      <div class="bank-hdr">
+        <span>בחר שיעור להוספה</span>
+        <button id="bankCloseBtn">✕</button>
+      </div>
+      <div class="bank-sb">
+        <input id="bankQ" type="text" placeholder="חיפוש שיעור...">
+      </div>
+      <div class="bank-items" id="bankItems"></div>
+    </div>
+  </div>
+
+  <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
