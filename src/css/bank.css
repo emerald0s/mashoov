@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   SUBJECT BANK  (bottom sheet)
+   SUBJECT BANK  (bottom sheet) — Mashov theme
 ═══════════════════════════════════════ */
 
 .bank-overlay {
@@ -19,19 +19,21 @@
   background: #fff;
   width: 100%;
   max-height: 75vh;
-  border-radius: 16px 16px 0 0;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
 }
 
-/* Header bar */
+/* Header bar — Mashov primary green */
 .bank-hdr {
-  background: #388e3c;
+  background: #106030;
   color: #fff;
   padding: 14px 16px;
   font-size: 16px;
   font-weight: 600;
+  font-family: Roboto, 'Open Sans Hebrew', sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,67 +46,116 @@
   font-size: 22px;
   cursor: pointer;
   line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bank-hdr button:hover {
+  background: rgba(255,255,255,0.15);
 }
 
 /* Search input */
 .bank-sb {
   padding: 10px 12px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  background: #f4f4f4;
 }
 
 .bank-sb input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.23);
+  border-radius: 4px;
   font-size: 14px;
+  font-family: Roboto, 'Open Sans Hebrew', sans-serif;
   direction: rtl;
   outline: none;
+  background: #fff;
+  color: rgba(0,0,0,0.87);
 }
 
 .bank-sb input:focus {
-  border-color: #388e3c;
+  border-color: #106030;
+  box-shadow: 0 0 0 2px rgba(16,96,48,0.15);
+}
+
+.bank-sb input::placeholder {
+  color: rgba(0,0,0,0.54);
 }
 
 /* Scrollable item list */
 .bank-items {
   overflow-y: auto;
   flex: 1;
-  padding: 8px;
+  padding: 4px 8px 8px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
+  background: #fff;
 }
 
-/* Individual subject row */
+/* Individual subject row — matches .mshv-timetable-cell-subcell style */
 .bank-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  gap: 0;
+  padding: 0;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 0;
   cursor: pointer;
-  transition: background 0.12s;
+  transition: background 0.1s;
+  margin-top: 6px;
+  min-height: 52px;
+  overflow: hidden;
 }
 
-.bank-row:hover { background: #f5f5f5; }
+.bank-row:hover { background: #e6f0eb; }
 
-/* Color swatch */
+/* Color swatch — matches .mshv-timetable-cell-subcell-color: width:12px */
 .b-sw {
-  width: 10px;
-  height: 36px;
-  border-radius: 3px;
+  width: 12px;
+  align-self: stretch;
   flex-shrink: 0;
 }
 
-.b-inf { flex: 1; min-width: 0; }
-.b-nm  { font-size: 14px; font-weight: 700; }
-.b-sub { font-size: 12px; color: #888; margin-top: 2px; }
+/* Info area — matches .mshv-timetable-cell-subcell-content padding:4px */
+.b-inf {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 8px;
+  background: #f7f7f7;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+/* Subject name — matches .mshv-timetable-cell-subcell-header: font-weight:600 */
+.b-nm  {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.87);
+  text-align: right;
+}
+
+/* Teacher/room — matches .mshv-timetable-cell-subcell-subheader: font-size:14px */
+.b-sub {
+  font-size: 13px;
+  color: rgba(0,0,0,0.6);
+  margin-top: 2px;
+  text-align: right;
+}
+
+/* Plus button */
 .b-pl {
-  color: #388e3c;
+  color: #106030;
   font-size: 26px;
   font-weight: 300;
   line-height: 1;
+  padding: 0 12px;
+  align-self: center;
 }

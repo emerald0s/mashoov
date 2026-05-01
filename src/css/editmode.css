@@ -1,20 +1,22 @@
 /* ═══════════════════════════════════════
-   EDIT MODE
+   EDIT MODE  — updated colors for Mashov theme
 ═══════════════════════════════════════ */
 
-/* Sticky orange banner shown when editing */
+/* Sticky banner shown when editing — uses Mashov primary green */
 .edit-banner {
   display: none;
-  background: #e65100;
+  background: #106030;
   color: #fff;
   padding: 9px 14px;
   font-size: 13px;
+  font-family: Roboto, 'Open Sans Hebrew', sans-serif;
   align-items: center;
   justify-content: center;
   gap: 10px;
   position: sticky;
-  top: 58px;
-  z-index: 99;
+  top: 104px; /* 56px topbar + 48px tabbar */
+  z-index: 98;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .edit-banner.on {
@@ -23,13 +25,17 @@
 
 .edit-done {
   background: #fff;
-  color: #e65100;
+  color: #106030;
   border: none;
   border-radius: 14px;
   padding: 4px 14px;
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
+}
+
+.edit-done:hover {
+  background: #e6f0eb;
 }
 
 /* Red × delete button — top-left corner of card */
@@ -59,30 +65,32 @@
   left: 30px;
   top: 50%;
   transform: translateY(-50%);
-  color: #ccc;
+  color: #bdbdbd;
   font-size: 16px;
   pointer-events: none;
 }
 
-/* Show controls when edit mode is active */
+/* Show controls in edit mode */
 .edit-mode .del-btn  { display: block; }
 .edit-mode .drag-hdl { display: block; }
 .edit-mode .card.filled { cursor: grab; }
 .edit-mode .card.filled:active { cursor: grabbing; }
 
-/* "Add lesson" button at the bottom of the list */
+/* "Add lesson" button — matches Mashov green/light palette */
 .add-slot {
   display: none;
-  margin-top: 4px;
-  background: #e8f5e9;
-  border: 2px dashed #81c784;
-  border-radius: 3px;
+  margin-top: 8px;
+  background: #e6f0eb;
+  border: 2px dashed #106030;
+  border-radius: 0;
   padding: 13px;
   text-align: center;
-  color: #388e3c;
+  color: #106030;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.12s;
 }
 
-.add-slot:hover { background: #c8e6c9; }
+.add-slot:hover { background: #c8ddd1; }
 .edit-mode .add-slot { display: block; }

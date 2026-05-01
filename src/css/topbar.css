@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   TOP BAR
+   GLOBAL + TOP BAR — matches real Mashov
 ═══════════════════════════════════════ */
 
 * {
@@ -10,72 +10,78 @@
 }
 
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  background: #ebebeb;
+  font-family: Roboto, 'Open Sans Hebrew', 'Helvetica Neue', sans-serif, Arial;
+  background: #fafafa;
   direction: rtl;
   min-height: 100vh;
 }
 
+/* ── Top bar ── */
 .topbar {
   background: #106030;
-  height: 58px;
+  height: 56px;
   display: flex;
+  flex-direction: row;   /* LTR flex so DOM order = left→right visually */
   align-items: center;
-  padding: 0 8px;
-  position: sticky;
+  padding: 0 4px;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.1);
 }
 
 /*
-  RTL layout:
-  - tb-icons (bell + ?) renders on the RIGHT (first child in RTL)
-  - tb-title is centred
-  - tb-menu (☰) renders on the LEFT (last child in RTL)
-  This matches the screenshot exactly.
+  The real Mashov toolbar uses LTR flex direction internally even on an RTL page.
+  DOM order:  [hamburger] [title] [grow-spacer] [help] [bell]
+  Renders as: hamburger on LEFT, title centred, help+bell on RIGHT
 */
 
-.tb-icons {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 0 0 auto;
-}
-
+/* Page title — sits between hamburger and right icons */
 .tb-title {
   flex: 1;
   text-align: center;
   color: #ffffff;
   font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
-.tb-menu {
-  flex: 0 0 auto;
-}
+/* Spacer is NOT needed — tb-title already fills the middle */
+.tb-grow { display: none; }
 
-/* Generic icon tap zone */
+/* Generic icon button — matches mat-mdc-icon-button sizing */
 .ib {
   background: none;
   border: none;
   color: #ffffff;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  flex-shrink: 0;
   position: relative;
+  transition: background 0.15s;
 }
 
-/* Red notification badge */
+.ib:hover  { background: rgba(255,255,255,0.10); }
+.ib:active { background: rgba(255,255,255,0.18); }
+
+/* Lit state when edit mode is ON */
+.ib--active {
+  background: rgba(255,255,255,0.22) !important;
+}
+
+/* Red notification badge on the bell */
 .notif-badge {
   position: absolute;
-  top: 4px;
-  right: 2px;
+  top: 6px;
+  right: 4px;
   background: #e53935;
   color: #ffffff;
   font-size: 10px;
@@ -89,21 +95,12 @@ body {
   padding: 0 3px;
   line-height: 1;
   border: 1.5px solid #106030;
+  pointer-events: none;
 }
 
-/* ? — white bordered circle */
-.qbtn {
-  background: rgba(255, 255, 255, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  color: #ffffff;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+/* Push body content below fixed topbar */
+body::before {
+  content: '';
+  display: block;
+  height: 56px;
 }

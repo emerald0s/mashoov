@@ -1,27 +1,38 @@
 /* ═══════════════════════════════════════
-   TAB BAR
+   TAB BAR  — matches real Mashov
+   Uses mat-mdc-tab-group style from sunday.html
 ═══════════════════════════════════════ */
 
 .tabbar {
-  background: #1a5276;
+  background: #f4f4f4;
   display: flex;
   align-items: stretch;
-  height: 46px;
+  height: 48px;
+  border-bottom: none;
+  position: sticky;
+  top: 56px;
+  z-index: 99;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 }
 
-/* Arrow boxes — indigo #3f51b5 as specified */
+/* Arrow pagination buttons — indigo like mat-mdc-tab-header-pagination */
 .tab-arrow {
-  background: #3f51b5;
+  background: #f4f4f4;
   border: none;
-  color: #ffffff;
-  font-size: 24px;
-  width: 36px;
+  color: rgba(0,0,0,0.87);
+  font-size: 22px;
+  width: 40px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 0;
+  transition: background 0.12s;
+}
+
+.tab-arrow:hover {
+  background: #e3e3e3;
 }
 
 .tabs-row {
@@ -30,23 +41,41 @@
   overflow: hidden;
 }
 
+/* Individual tab — matches .mdc-tab in sunday.html */
 .tab {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Inactive day text: white at reduced opacity */
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  font-weight: 400;
+
+  background: #f4f4f4;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+
+  color: rgba(0,0,0,0.6);
+  font-family: 'Assistant', Roboto, 'Open Sans Hebrew', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-align: center;
+
   cursor: pointer;
   white-space: nowrap;
   user-select: none;
+  outline: none;
+  border: none;
+
+  transition: background 0.12s, color 0.12s;
 }
 
-/* Active tab: light blue-grey fill + #ffc107 amber text */
+.tab:hover {
+  background: #e3e3e3;
+  color: #005ba8;
+}
+
+/* Active tab — matches .mdc-tab--active + .mdc-tab-indicator--active in sunday.html */
 .tab.active {
-  background: #d6eaf8;
-  color: #ffc107;
-  font-weight: 700;
+  background: #dcecfa;
+  color: #005ba8;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 }

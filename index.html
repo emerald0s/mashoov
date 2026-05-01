@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <title>משו"ב - מערכת שעות</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/topbar.css">
   <link rel="stylesheet" href="src/css/tabbar.css">
   <link rel="stylesheet" href="src/css/cards.css">
@@ -12,51 +14,113 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="tb-icons">
-      <button class="ib" id="bellBtn">
-        🔔
-        <span class="notif-badge" id="notifBadge">4</span>
-      </button>
-      <button class="qbtn" id="editBtn">?</button>
+<!--
+  REAL MASHOV TOPBAR — RTL, so DOM order = visual right→left:
+    [1] hamburger (visually LEFT  in RTL → last in DOM BUT flex-row-reverse fixes it)
+
+  Actually in the real app the toolbar uses LTR flex internally despite RTL page.
+  DOM order from sunday.html:  hamburger | title | <grow spacer> | help | bell
+  In RTL page this renders:   bell | help | <spacer> | title | hamburger
+  which is exactly what we want: icons on right, hamburger on left.
+-->
+<div class="topbar">
+
+  <!-- hamburger — visually LEFT, first in DOM -->
+  <button class="ib" aria-label="תפריט ראשי">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
+
+  <!-- page title — centred via flex:1 -->
+  <div class="tb-title">משו"ב - מערכת שעות</div>
+
+  <!-- help / edit-toggle button -->
+  <button class="ib" id="editBtn" aria-label="עריכה">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path id="editBtnPath" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+    </svg>
+  </button>
+
+  <!-- bell / notifications -->
+  <button class="ib" id="bellBtn" aria-label="התראות">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+    </svg>
+    <span class="notif-badge" id="notifBadge">4</span>
+  </button>
+
+</div>
+
+<!-- EDIT BANNER -->
+<div class="edit-banner" id="editBanner">
+  <span>מצב עריכה — גרור שיעורים לשינוי סדר</span>
+  <button class="edit-done" id="editDoneBtn">סיום</button>
+</div>
+
+<!-- TAB BAR -->
+<div class="tabbar">
+  <button class="tab-arrow" id="arrowLeft">&#8249;</button>
+  <div class="tabs-row" id="tabsRow"></div>
+  <button class="tab-arrow" id="arrowRight">&#8250;</button>
+</div>
+
+<!-- PERIOD LIST -->
+<div class="period-list" id="periodList"></div>
+
+<!-- SUBJECT BANK (bottom sheet) -->
+<div class="bank-overlay" id="bankOverlay">
+  <div class="bank-sheet">
+    <div class="bank-hdr">
+      <span>בחר שיעור להוספה</span>
+      <button id="bankCloseBtn" aria-label="סגור">&#x2715;</button>
     </div>
-    <div class="tb-title">משו"ב - מערכת שעות</div>
-    <div class="tb-menu">
-      <button class="ib">☰</button>
+    <div class="bank-sb">
+      <input id="bankQ" type="text" placeholder="חיפוש שיעור...">
     </div>
+    <div class="bank-items" id="bankItems"></div>
   </div>
+</div>
 
-  <!-- EDIT BANNER -->
-  <div class="edit-banner" id="editBanner">
-    <span>מצב עריכה — גרור שיעורים לשינוי סדר</span>
-    <button class="edit-done" id="editDoneBtn">סיום</button>
-  </div>
+<!-- Main app (navigation, drag, bank) -->
+<script type="module" src="src/js/main.js"></script>
 
-  <!-- TAB BAR -->
-  <div class="tabbar">
-    <button class="tab-arrow" id="arrowLeft">&#8249;</button>
-    <div class="tabs-row" id="tabsRow"></div>
-    <button class="tab-arrow" id="arrowRight">&#8250;</button>
-  </div>
+<!-- Edit toggle — runs after main.js, owns editBtn & editDoneBtn completely -->
+<script type="module">
+  import { setEditMode } from './src/js/state.js';
+  import { render }      from './src/js/render.js';
 
-  <!-- PERIOD LIST -->
-  <div class="period-list" id="periodList"></div>
+  const editBtn     = document.getElementById('editBtn');
+  const editBanner  = document.getElementById('editBanner');
+  const editDoneBtn = document.getElementById('editDoneBtn');
+  const btnPath     = document.getElementById('editBtnPath');
 
-  <!-- SUBJECT BANK (bottom sheet) -->
-  <div class="bank-overlay" id="bankOverlay">
-    <div class="bank-sheet">
-      <div class="bank-hdr">
-        <span>בחר שיעור להוספה</span>
-        <button id="bankCloseBtn">✕</button>
-      </div>
-      <div class="bank-sb">
-        <input id="bankQ" type="text" placeholder="חיפוש שיעור...">
-      </div>
-      <div class="bank-items" id="bankItems"></div>
-    </div>
-  </div>
+  const ICON_HELP  = 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z';
+  const ICON_CLOSE = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z';
 
-  <script type="module" src="src/js/main.js"></script>
+  let isEdit = false;
+
+  function enter() {
+    isEdit = true;
+    setEditMode(true);
+    editBanner.classList.add('on');
+    editBtn.classList.add('ib--active');
+    btnPath.setAttribute('d', ICON_CLOSE);
+    render();
+  }
+
+  function exit() {
+    isEdit = false;
+    setEditMode(false);
+    editBanner.classList.remove('on');
+    editBtn.classList.remove('ib--active');
+    btnPath.setAttribute('d', ICON_HELP);
+    render();
+  }
+
+  editBtn.addEventListener('click',     () => isEdit ? exit() : enter());
+  editDoneBtn.addEventListener('click', exit);
+</script>
+
 </body>
 </html>
